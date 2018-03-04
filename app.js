@@ -4,11 +4,32 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var catalog = require('./routes/catalog');  //Import routes for "catalog" area of site
 
+
+// var wiki = require('./wiki.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var cool = require('./routes/cool');
+
 
 var app = express();
+
+
+//Set up mongoose connection
+var mongoose = require('mongoose');
+
+// var db = mongoose.createConnection('mongodb://127.0.0.1:27017/test');
+// db.on("error", console.error.bind(console, "connection error:")); db.once("open", function callback () {
+//     console.log("Connected!"); });
+
+mongoose.connect('mongodb://127.0.0.1/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once("open", function callback () {
+    console.log("Connected!"); });
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +45,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/users/cool', cool);
+// app.use('/wiki', wiki);
+app.use('/catalog', catalog);  // Add catalog routes to middleware chain.
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,5 +69,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

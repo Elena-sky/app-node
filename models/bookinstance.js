@@ -19,10 +19,12 @@ BookInstanceSchema
     });
 
 //Export model
-module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+//module.exports = mongoose.model('BookInstance', BookInstanceSchema);
 
-// try {
-//     exports.getModel = mongoose.model('User', userSchema)
-// } catch (err) {
-//     exports.getModel = mongoose.model('User')
-// };
+try {
+    exports.getModel = mongoose.model('BookInstance', BookInstanceSchema);
+} catch (err) {
+    exports.getModel = mongoose.model('BookInstance');
+};
+
+// export const User = mongoose.models.User || mongoose.model('User', user);
