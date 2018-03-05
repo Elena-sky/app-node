@@ -1,9 +1,19 @@
 var Genre = require('../models/genre');
 
 // Display list of all Genre.
-exports.genre_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre list');
+exports.genre_list = function(req, res, next) {
+
+    Genre.find()
+        .sort([['genre_name', 'descending']])
+        .exec(function (err, list_genres) {
+            if (err) { return next(err); }
+            //Successful, so render
+            res.render('genre_list', { title: 'Genre List', genre_list: list_genres });
+        });
 };
+
+// Шаблон, который нужно визуализировать, должен быть передан переменными title(«Список жанров»)
+// и genre_list (список жанров, возвращаемых с вашего Genre.find()обратного вызова.
 
 // Display detail page for a specific Genre.
 exports.genre_detail = function(req, res) {
