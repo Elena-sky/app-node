@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var Genre = new Schema(
     {
-        genre_name: {type: String, required: true, min: 3, max: 100}
+        name: {type: String, required: true, min: 3, max: 100}
     }
 );
 
