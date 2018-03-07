@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var moment = require('moment');
+var Book = require('../models/book');
+
 
 var Schema = mongoose.Schema;
 
@@ -26,12 +28,21 @@ BookInstanceSchema
     });
 
 //Export model
-//module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+//
+// try {
+//     module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+//
+//     // exports.getModel = mongoose.model('BookInstance', BookInstanceSchema);
+// } catch (err) {
+//     exports.getModel = mongoose.model('BookInstance');
+// }
 
-try {
-    exports.getModel = mongoose.model('BookInstance', BookInstanceSchema);
-} catch (err) {
-    exports.getModel = mongoose.model('BookInstance');
-};
+
+// if (mongoose.model('BookInstance')) {
+//     exports.getModel = mongoose.model('BookInstance');
+// } else {
+// module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+// }
 
 // export const User = mongoose.models.User || mongoose.model('User', user);
