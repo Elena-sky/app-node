@@ -28,7 +28,7 @@ BookInstanceSchema
     });
 
 //Export model
-module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+// module.exports = mongoose.model('BookInstance', BookInstanceSchema);
 //
 // try {
 //     module.exports = mongoose.model('BookInstance', BookInstanceSchema);
@@ -39,10 +39,10 @@ module.exports = mongoose.model('BookInstance', BookInstanceSchema);
 // }
 
 
-// if (mongoose.model('BookInstance')) {
-//     exports.getModel = mongoose.model('BookInstance');
-// } else {
-// module.exports = mongoose.model('BookInstance', BookInstanceSchema);
-// }
+if (mongoose.model('BookInstance')) {
+    exports.getModel = mongoose.model('BookInstance');
+} else {
+module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+}
 
 // export const User = mongoose.models.User || mongoose.model('User', user);
